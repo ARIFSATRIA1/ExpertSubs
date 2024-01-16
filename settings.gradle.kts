@@ -15,4 +15,4 @@ dependencyResolutionManagement {
 
 rootProject.name = "ExpertSubs"
 include(":app")
- 
+include(":core")

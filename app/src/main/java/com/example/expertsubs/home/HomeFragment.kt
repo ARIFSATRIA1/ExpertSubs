@@ -48,13 +48,13 @@ class HomeFragment : Fragment() {
             homeViewModel.tourism.observe(viewLifecycleOwner) { user ->
                 if (user != null) {
                     when (user) {
-                        is Resource.Loading -> binding.progressBar.visibility = View.VISIBLE
-                        is Resource.Success -> {
+                        is com.example.expertsubs.core.data.source.Resource.Loading -> binding.progressBar.visibility = View.VISIBLE
+                        is com.example.expertsubs.core.data.source.Resource.Success -> {
                             binding.progressBar.visibility = View.GONE
                             userAdapter.setData(user.data)
                         }
 
-                        is Resource.Error -> {
+                        is com.example.expertsubs.core.data.source.Resource.Error -> {
                             binding.progressBar.visibility = View.GONE
                         }
                     }
