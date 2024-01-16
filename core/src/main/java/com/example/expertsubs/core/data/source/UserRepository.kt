@@ -24,8 +24,8 @@ class UserRepository @Inject constructor(
     private val localDataSource: LocalDataSource,
     private val appExecutors: AppExecutors
 ): IUserRepository{
-    override fun getAllUser(): Flow<Resource<List<Users>>> =
-        object : NetworkBoundResources<List<Users>, List<ItemsItem>>() {
+    override fun getAllUser(): Flow<com.example.expertsubs.core.data.source.Resource<List<Users>>> =
+        object : com.example.expertsubs.core.data.source.NetworkBoundResources<List<Users>, List<ItemsItem>>() {
             override fun loadFromDB(): Flow<List<Users>> {
                 return localDataSource.getAllAnime().map {
                     DataMapper.mapEntitiesToDomain(it)

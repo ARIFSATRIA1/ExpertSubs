@@ -5,9 +5,9 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
-import com.example.expertsubs.R
+import com.example.expertsubs.core.R
 import com.example.expertsubs.core.domain.model.Users
-import com.example.expertsubs.databinding.ItemListUserBinding
+import com.example.expertsubs.core.databinding.ItemListUserBinding
 
 
 class UserAdapter: RecyclerView.Adapter<UserAdapter.ListViewHolder>() {

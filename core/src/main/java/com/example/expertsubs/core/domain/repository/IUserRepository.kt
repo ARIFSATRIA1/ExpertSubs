@@ -7,7 +7,7 @@ import kotlinx.coroutines.flow.Flow
 
 interface IUserRepository {
 
-    fun getAllUser(): Flow<Resource<List<Users>>>
+    fun getAllUser(): Flow<com.example.expertsubs.core.data.source.Resource<List<Users>>>
 
     fun getFavoriteUser(): Flow<List<Users>>
 
