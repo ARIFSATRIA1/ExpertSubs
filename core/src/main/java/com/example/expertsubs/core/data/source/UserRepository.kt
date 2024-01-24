@@ -2,13 +2,10 @@ package com.example.expertsubs.core.data.source
 
 
 
-import androidx.lifecycle.LiveData
-import androidx.lifecycle.map
 import com.example.expertsubs.core.data.source.local.LocalDataSource
 import com.example.expertsubs.core.data.source.remote.RemoteDataSource
 import com.example.expertsubs.core.data.source.remote.network.ApiResponse
 import com.example.expertsubs.core.data.source.remote.response.ItemsItem
-import com.example.expertsubs.core.data.source.remote.response.UserResponse
 import com.example.expertsubs.core.domain.model.Users
 import com.example.expertsubs.core.domain.repository.IUserRepository
 import com.example.expertsubs.core.utils.AppExecutors
@@ -24,8 +21,8 @@ class UserRepository @Inject constructor(
     private val localDataSource: LocalDataSource,
     private val appExecutors: AppExecutors
 ): IUserRepository{
-    override fun getAllUser(): Flow<com.example.expertsubs.core.data.source.Resource<List<Users>>> =
-        object : com.example.expertsubs.core.data.source.NetworkBoundResources<List<Users>, List<ItemsItem>>() {
+    override fun getAllUser(): Flow<Resource<List<Users>>> =
+        object : NetworkBoundResources<List<Users>, List<ItemsItem>>() {
             override fun loadFromDB(): Flow<List<Users>> {
                 return localDataSource.getAllAnime().map {
                     DataMapper.mapEntitiesToDomain(it)

@@ -1,4 +1,4 @@
-package com.example.expert_subs.core.ui
+package com.example.expertsubs.core.ui
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider

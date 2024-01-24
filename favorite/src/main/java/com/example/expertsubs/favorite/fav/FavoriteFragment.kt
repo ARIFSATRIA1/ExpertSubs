@@ -1,21 +1,17 @@
 package com.example.expertsubs.favorite.fav
 
-import android.content.Context
 import android.content.Intent
 import android.os.Bundle
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.fragment.app.findFragment
+import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
-import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.expertsubs.core.ui.UserAdapter
-import com.example.expertsubs.favorite.databinding.FragmentFavoriteBinding
 import com.example.expertsubs.detail.DetailActivity
 import com.example.expertsubs.di.FavoriteModuleDependencies
-import dagger.hilt.android.AndroidEntryPoint
+import com.example.expertsubs.favorite.databinding.FragmentFavoriteBinding
 import dagger.hilt.android.EntryPointAccessors
 import javax.inject.Inject
 
