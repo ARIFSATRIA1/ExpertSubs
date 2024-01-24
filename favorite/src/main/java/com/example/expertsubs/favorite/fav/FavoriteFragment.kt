@@ -1,32 +1,54 @@
-package com.example.expertsubs.favorite
+package com.example.expertsubs.favorite.fav
 
 import android.content.Intent
 import android.os.Bundle
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.example.expertsubs.R
 import com.example.expertsubs.core.ui.UserAdapter
-import com.example.expertsubs.databinding.FragmentFavoriteBinding
 import com.example.expertsubs.detail.DetailActivity
-import com.example.expertsubs.favorite.FavoriteViewModel
-import dagger.hilt.android.AndroidEntryPoint
+import com.example.expertsubs.di.FavoriteModuleDependencies
+import com.example.expertsubs.favorite.databinding.FragmentFavoriteBinding
+import dagger.hilt.android.EntryPointAccessors
+import javax.inject.Inject
 
-@AndroidEntryPoint
+
 class FavoriteFragment : Fragment() {
 
-    private val favoriteViewModel: FavoriteViewModel by viewModels()
+
+    @Inject
+    lateinit var factory: ViewModelFactory
+
+    private val favoriteViewModel: FavoriteViewModel by viewModels {
+        factory
+    }
 
     private var _binding: FragmentFavoriteBinding? = null
     val binding get() = _binding!!
 
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+
+        DaggerFavoriteModule.builder()
+            .context(requireContext())
+            .appDependencies(
+                EntryPointAccessors.fromApplication(
+                    requireContext(),
+                    FavoriteModuleDependencies::class.java
+                )
+            )
+            .build()
+            .inject(this)
+    }
+
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?,
-    ): View? {
+    ): View {
+
         // Inflate the layout for this fragment
         _binding = FragmentFavoriteBinding.inflate(inflater, container, false)
         return binding.root
@@ -54,6 +76,5 @@ class FavoriteFragment : Fragment() {
             }
         }
     }
-
 
 }

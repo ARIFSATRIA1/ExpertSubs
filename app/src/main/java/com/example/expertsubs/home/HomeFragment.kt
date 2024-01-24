@@ -2,18 +2,16 @@ package com.example.expertsubs.home
 
 import android.content.Intent
 import android.os.Bundle
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.example.expertsubs.R
 import com.example.expertsubs.core.data.source.Resource
 import com.example.expertsubs.core.ui.UserAdapter
 import com.example.expertsubs.databinding.FragmentHomeBinding
 import com.example.expertsubs.detail.DetailActivity
-import dagger.Binds
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
@@ -28,7 +26,7 @@ class HomeFragment : Fragment() {
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?,
-    ): View? {
+    ): View {
         // Inflate the layout for this fragment
         _binding = FragmentHomeBinding.inflate(inflater,container,false)
         return binding.root
@@ -48,13 +46,13 @@ class HomeFragment : Fragment() {
             homeViewModel.tourism.observe(viewLifecycleOwner) { user ->
                 if (user != null) {
                     when (user) {
-                        is com.example.expertsubs.core.data.source.Resource.Loading -> binding.progressBar.visibility = View.VISIBLE
-                        is com.example.expertsubs.core.data.source.Resource.Success -> {
+                        is Resource.Loading -> binding.progressBar.visibility = View.VISIBLE
+                        is Resource.Success -> {
                             binding.progressBar.visibility = View.GONE
                             userAdapter.setData(user.data)
                         }
 
-                        is com.example.expertsubs.core.data.source.Resource.Error -> {
+                        is Resource.Error -> {
                             binding.progressBar.visibility = View.GONE
                         }
                     }

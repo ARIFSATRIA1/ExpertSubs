@@ -11,9 +11,10 @@
         android:label="@string/title_home"
         tools:layout="@layout/fragment_home" />
 
+
     <fragment
         android:id="@+id/navigation_favorite"
-        android:name="com.example.expertsubs.favorite.FavoriteFragment"
+        android:name="com.example.expertsubs.favorite.fav.FavoriteFragment"
         android:label="@string/favorite"
         tools:layout="@layout/fragment_favorite" />
 
