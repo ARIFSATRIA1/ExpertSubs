@@ -27,6 +27,6 @@ class DatabaseModule {
         .build()
 
     @Provides
-    fun provideUserDao(database: UserDatabase): UserDao = database.animeDao()
+    fun provideUserDao(database: UserDatabase): UserDao = database.githubDao()
 
 }

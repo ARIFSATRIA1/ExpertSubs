@@ -43,7 +43,7 @@ class HomeFragment : Fragment() {
             }
 
 
-            homeViewModel.tourism.observe(viewLifecycleOwner) { user ->
+            homeViewModel.github.observe(viewLifecycleOwner) { user ->
                 if (user != null) {
                     when (user) {
                         is Resource.Loading -> binding.progressBar.visibility = View.VISIBLE
