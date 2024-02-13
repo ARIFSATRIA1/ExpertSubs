@@ -18,9 +18,9 @@ interface UserDao {
     fun getFavoriteGithubUsers(): Flow<List<UserEntity>>
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
-    fun insertGithubUsers(anime: List<UserEntity>)
+    fun insertGithubUsers(user: List<UserEntity>)
 
     @Update
-    fun updateGithubUsers(anime: UserEntity)
+    fun updateGithubUsers(user: UserEntity)
 
 }

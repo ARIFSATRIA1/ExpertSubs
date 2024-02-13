@@ -21,12 +21,12 @@ class UserRepository @Inject constructor(
     private val localDataSource: LocalDataSource,
     private val appExecutors: AppExecutors
 ): IUserRepository{
+
+    // to get all list github users from network and get from a local data source
     override fun getAllGithubUsers(): Flow<Resource<List<Users>>> =
         object : NetworkResources<List<Users>, List<ItemsItem>>() {
-            override fun loadFromDB(): Flow<List<Users>> {
-                return localDataSource.getAllAnime().map {
-                    DataMapper.mapEntitiesToDomain(it)
-                }
+            override fun loadFromDB(): Flow<List<Users>> = localDataSource.getAllAnime().map {
+                DataMapper.mapEntitiesToDomain(it)
             }
 
             override suspend fun createCall(): Flow<ApiResponse<List<ItemsItem>>> {
@@ -44,13 +44,13 @@ class UserRepository @Inject constructor(
             }
         }.asFlow()
 
-
-    override fun getFavoriteGithubUsers(): Flow<List<Users>> {
-        return localDataSource.getFavoriteAnime().map {
-            DataMapper.mapEntitiesToDomain(it)
-        }
+    // function to get a favorite a github users to localdata source
+    override fun getFavoriteGithubUsers(): Flow<List<Users>> = localDataSource.getFavoriteAnime().map {
+        DataMapper.mapEntitiesToDomain(it)
     }
 
+
+    // function to set a favorite users to local data source
     override fun setFavoriteGithubUsers(users: Users, state: Boolean) {
         val tourismEntity = DataMapper.mapDomainToEntity(users)
         appExecutors.diskIO().execute{localDataSource.setFavoriteAnime(tourismEntity, state)}

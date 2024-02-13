@@ -14,14 +14,13 @@ import javax.inject.Singleton
 class RemoteSource @Inject constructor(private val apiService: ApiService) {
 
 
-    suspend fun getAllUser(): Flow<ApiResponse<List<ItemsItem>>> {
-
-        return flow {
+    suspend fun getAllUser(): Flow<ApiResponse<List<ItemsItem>>> =
+        flow {
             try {
-                val responses = apiService.getUsersData()
-                val dataArray = responses.items
-                if (dataArray.isNotEmpty()) {
-                    emit(ApiResponse.Success(dataArray))
+                val response = apiService.getUsersData()
+                val data = response.items
+                if (data.isNotEmpty()) {
+                    emit(ApiResponse.Success(data))
                 } else {
                     emit(ApiResponse.Empty)
                 }
@@ -29,8 +28,4 @@ class RemoteSource @Inject constructor(private val apiService: ApiService) {
                 emit(ApiResponse.Error(e.toString()))
             }
         }.flowOn(Dispatchers.IO)
-
-    }
-
-
 }

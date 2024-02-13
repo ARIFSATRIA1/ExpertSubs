@@ -13,9 +13,10 @@ abstract class NetworkResources<ResultType, RequestType> {
     private var results: Flow<Resource<ResultType>> = flow {
         emit(Resource.Loading())
         val dbSource = loadFromDB().first()
+        val apiResponse = createCall().first()
         if (shouldFetch(dbSource)) {
             emit(Resource.Loading())
-            when (val apiResponse = createCall().first()) {
+            when (apiResponse) {
                 is ApiResponse.Success -> {
                     saveCallResult(apiResponse.data)
                     emitAll(loadFromDB().map {
