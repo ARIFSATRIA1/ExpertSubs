@@ -1,7 +1,7 @@
 version: 2.1
  
 orbs:
-  android: circleci/android@0.2.1
+  android: circleci/gradle@3.0.0
  
 jobs:
   build:
