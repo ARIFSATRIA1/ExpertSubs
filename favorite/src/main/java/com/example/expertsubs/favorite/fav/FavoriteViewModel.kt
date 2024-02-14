@@ -2,11 +2,9 @@ package com.example.expertsubs.favorite.fav
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.asLiveData
-import com.example.expertsubs.core.domain.usecase.UserUseCase
-import dagger.hilt.android.lifecycle.HiltViewModel
-import javax.inject.Inject
+import com.example.expertsubs.core.domain.usecase.GithubUserUseCase
 
 
-class FavoriteViewModel(userUseCase: UserUseCase): ViewModel() {
-    val favoriteUser = userUseCase.getFavoriteUser().asLiveData()
+class FavoriteViewModel(githubUserUseCase: GithubUserUseCase): ViewModel() {
+    val favoriteUser = githubUserUseCase.getFavoriteGithubUsers().asLiveData()
 }

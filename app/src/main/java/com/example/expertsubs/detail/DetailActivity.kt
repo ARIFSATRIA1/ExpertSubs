@@ -42,7 +42,7 @@ class DetailActivity : AppCompatActivity() {
             setStatusFavorite(statusFavorite)
             binding.fab.setOnClickListener {
                 statusFavorite = !statusFavorite
-                detailViewModel.setFavoriteUser(detailUsers, statusFavorite)
+                detailViewModel.setFavoriteGithubUsers(detailUsers, statusFavorite)
                 setStatusFavorite(statusFavorite)
             }
         }

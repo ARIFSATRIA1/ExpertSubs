@@ -10,7 +10,7 @@ import androidx.fragment.app.viewModels
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.expertsubs.core.ui.UserAdapter
 import com.example.expertsubs.detail.DetailActivity
-import com.example.expertsubs.di.FavoriteModuleDependencies
+import com.example.expertsubs.core.di.FavModuleDependencies
 import com.example.expertsubs.favorite.databinding.FragmentFavoriteBinding
 import dagger.hilt.android.EntryPointAccessors
 import javax.inject.Inject
@@ -37,7 +37,7 @@ class FavoriteFragment : Fragment() {
             .appDependencies(
                 EntryPointAccessors.fromApplication(
                     requireContext(),
-                    FavoriteModuleDependencies::class.java
+                    FavModuleDependencies::class.java
                 )
             )
             .build()

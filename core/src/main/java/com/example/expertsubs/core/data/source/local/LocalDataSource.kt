@@ -10,15 +10,15 @@ import javax.inject.Singleton
 class LocalDataSource @Inject constructor(private val userDao: UserDao){
 
 
-    fun getAllAnime(): Flow<List<UserEntity>>  = userDao.getAllAnime()
+    fun getAllAnime(): Flow<List<UserEntity>>  = userDao.getAllGithubUsers()
 
-    fun getFavoriteAnime(): Flow<List<UserEntity>> = userDao.getFavoriteAnime()
+    fun getFavoriteAnime(): Flow<List<UserEntity>> = userDao.getFavoriteGithubUsers()
 
-    fun insertTourism(animeList: List<UserEntity>) = userDao.insertAnime(animeList)
+    fun insertTourism(animeList: List<UserEntity>) = userDao.insertGithubUsers(animeList)
 
     fun setFavoriteAnime(userEntity: UserEntity, newState: Boolean) {
         userEntity.isFavorite = newState
-        userDao.updateFavoriteTourism(userEntity)
+        userDao.updateGithubUsers(userEntity)
     }
 
 }

@@ -3,7 +3,7 @@ package com.example.expertsubs.core.data.source
 
 
 import com.example.expertsubs.core.data.source.local.LocalDataSource
-import com.example.expertsubs.core.data.source.remote.RemoteDataSource
+import com.example.expertsubs.core.data.source.remote.RemoteSource
 import com.example.expertsubs.core.data.source.remote.network.ApiResponse
 import com.example.expertsubs.core.data.source.remote.response.ItemsItem
 import com.example.expertsubs.core.domain.model.Users
@@ -17,20 +17,20 @@ import javax.inject.Singleton
 
 @Singleton
 class UserRepository @Inject constructor(
-    private val remoteDataSource: RemoteDataSource,
+    private val remoteSource: RemoteSource,
     private val localDataSource: LocalDataSource,
     private val appExecutors: AppExecutors
 ): IUserRepository{
-    override fun getAllUser(): Flow<Resource<List<Users>>> =
-        object : NetworkBoundResources<List<Users>, List<ItemsItem>>() {
-            override fun loadFromDB(): Flow<List<Users>> {
-                return localDataSource.getAllAnime().map {
-                    DataMapper.mapEntitiesToDomain(it)
-                }
+
+    // to get all list github users from network and get from a local data source
+    override fun getAllGithubUsers(): Flow<Resource<List<Users>>> =
+        object : NetworkResources<List<Users>, List<ItemsItem>>() {
+            override fun loadFromDB(): Flow<List<Users>> = localDataSource.getAllAnime().map {
+                DataMapper.mapEntitiesToDomain(it)
             }
 
             override suspend fun createCall(): Flow<ApiResponse<List<ItemsItem>>> {
-                return remoteDataSource.getAllUser()
+                return remoteSource.getAllUser()
             }
 
             override suspend fun saveCallResult(data: List<ItemsItem>) {
@@ -44,14 +44,14 @@ class UserRepository @Inject constructor(
             }
         }.asFlow()
 
-
-    override fun getFavoriteUser(): Flow<List<Users>> {
-        return localDataSource.getFavoriteAnime().map {
-            DataMapper.mapEntitiesToDomain(it)
-        }
+    // function to get a favorite a github users to localdata source
+    override fun getFavoriteGithubUsers(): Flow<List<Users>> = localDataSource.getFavoriteAnime().map {
+        DataMapper.mapEntitiesToDomain(it)
     }
 
-    override fun setFavoriteUser(users: Users, state: Boolean) {
+
+    // function to set a favorite users to local data source
+    override fun setFavoriteGithubUsers(users: Users, state: Boolean) {
         val tourismEntity = DataMapper.mapDomainToEntity(users)
         appExecutors.diskIO().execute{localDataSource.setFavoriteAnime(tourismEntity, state)}
     }
