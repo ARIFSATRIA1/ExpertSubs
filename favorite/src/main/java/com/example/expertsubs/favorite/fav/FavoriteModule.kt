@@ -1,7 +1,7 @@
 package com.example.expertsubs.favorite.fav
 
 import android.content.Context
-import com.example.expertsubs.di.FavModuleDependencies
+import com.example.expertsubs.core.di.FavModuleDependencies
 import dagger.BindsInstance
 import dagger.Component
 

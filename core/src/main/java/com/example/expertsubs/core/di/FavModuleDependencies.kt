@@ -1,4 +1,4 @@
-package com.example.expertsubs.di
+package com.example.expertsubs.core.di
 
 import com.example.expertsubs.core.domain.usecase.GithubUserUseCase
 import dagger.hilt.EntryPoint
